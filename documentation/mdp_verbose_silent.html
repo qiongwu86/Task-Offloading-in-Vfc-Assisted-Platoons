@@ -1,0 +1,69 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_verbose and mdp_silent description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_verbose, mdp_silent</font></font></b>
+<font color="#000000"><p>Defines verbose or silent running mode.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000"><p>mdp_verbose
+<br> mdp_silent</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_verbose is used to display running information (such
+as the number of iterations) while solution algorithms are running.
+<br>mdp_silent is used to not display such information.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<font color="#000000">
+Effect of the verbose mode, running the function mdp_policy_iteration.<br>
+
+>> P(:,:,1) = [ 0.5 0.5; &nbsp 0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0   1; &nbsp 0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp -1 2 ];<br><br>
+
+>> mdp_verbose<br>
+>> V = mdp_policy_iteration(P, R, 0.9)<br>
+&nbsp  Iteration  Number_of_different_actions<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                 1<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                 0<br>
+V =<br>
+&nbsp&nbsp   42.4419<br>
+&nbsp&nbsp   36.0465<br>
+<br>
+>> mdp_silent<br>
+>> V = mdp_policy_iteration(P, R, 0.9)<br>
+V =<br>
+&nbsp&nbsp   42.4419<br>
+&nbsp&nbsp   36.0465<br>
+</font>
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_verbose_silent.html
+<br>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

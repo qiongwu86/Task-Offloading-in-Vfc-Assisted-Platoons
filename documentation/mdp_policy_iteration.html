@@ -1,0 +1,115 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_policy_iteration description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_policy_iteration</font></font></b>
+<font color="#000000">
+<p>Solves discounted MDP with policy iteration algorithm.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<p> [V, policy, iter, cpu_time] = mdp_policy_iteration (P, R, discount)
+<br> [V, policy, iter, cpu_time] = mdp_policy_iteration (P, R, discount, policy0)
+<br> [V, policy, iter, cpu_time] = mdp_policy_iteration (P, R, discount, policy0, max_iter)
+<br> [V, policy, iter, cpu_time] = mdp_policy_iteration (P, R, discount, policy0, max_iter, eval_type)
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_policy_iteration applies the policy iteration algorithm to
+solve discounted MDP. The algorithm consists in
+improving the policy iteratively, using the evaluation of the current policy.
+<br>Iterating is stopped when two successive policies are identical or when
+a specified number (max_iter) of iterations have been performed.
+<br>This function uses verbose and silent modes. In verbose mode, the function
+displays the number of different actions between the policies n-1 and n
+after each iteration.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA) possibly sparse.
+<ul><li><b>discount : </b>discount factor.</li></ul>
+discount is a real which belongs to ]0; 1[.
+<ul><li><b>policy0 (optional) : </b>starting policy.</li></ul>
+policy0 is a (Sx1) vector.
+<br> By default, policy0 is the policy which maximizes the expected immediate reward.
+<ul><li><b>max_iter (optional) : </b>maximum number of iterations to be done.</li></ul>
+max_iter is an integer greater than 0.
+<br> By default, max_iter is set to 1000.
+<ul><li><b>eval_type (optional) : </b>define function used to evaluate a policy.</li></ul>
+eval_type is 0 for mdp_eval_policy_matrix use, mdp_eval_policy_iterative is used in all other cases.
+<br> By default, eval_type is set to 0.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluations</font></font></b>
+<font color="#000000">
+<ul><li><b>V :</b> optimal value fonction.</li></ul>
+V is a (Sx1) vector.
+<ul><li><b>policy : </b>optimal policy.</li></ul>
+policy is a (Sx1) vector. Each element is an integer
+corresponding to an action which maximizes the value function.
+<ul><li><b>iter : </b>number of iterations.</li></ul>
+<ul><li><b>cpu_time : </b>CPU time used to run the program.</li></ul>
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<font color="#999999">In grey, verbose mode display.</font><br>
+<p><font color="#000000">
+>> P(:,:,1) = [ 0.5 0.5; &nbsp 0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0   1; &nbsp 0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp -1 2 ];<br>
+<br>
+>> [V, policy, iter, cpu_time] = mdp_policy_iteration(P, R, 0.9)<br>
+<font color="#999999">&nbsp  Iteration  Number_of_different_actions<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                 1<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp       2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp                 0<br></font>
+V =<br>
+&nbsp&nbsp   42.4419<br>
+&nbsp&nbsp   36.0465<br>
+policy =<br>
+&nbsp&nbsp     2<br>
+&nbsp&nbsp     1<br>
+iter =<br>
+&nbsp&nbsp     2<br>
+cpu_time =<br>
+&nbsp&nbsp    0.0200<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([ 0.5 0.5;&nbsp   0.8 0.2 ]);<br>
+>> P{2} = sparse([ 0 1;&nbsp   0.1 0.9 ]);<br>
+The function call is unchanged.<br>
+</font><br><br>
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_policy_iteration.html
+<br>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title>MDPtoolbox documentation presentation</title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDPtoolbox for MATLAB</b></td>
+</tr>
+</table>
+</center>
+
+
+<p>
+<br><br><b><font color="#FF0000"><font size=+3><center>MDPtoolbox: Markov Decision Processes toolbox </center></font></font></b><br>
+</table>
+<h5><center>
+    <a href="http://www.csiro.au/Organisation-Structure/Divisions/Ecosystem-Sciences/IadineChades.aspx">Iadine Chad&egraves</a>, 
+    <a href="http://www.carnivorescience.org">Guillaume Chapron</a>, 
+    <a href="http://www.inra.fr/mia/T/cros">Marie-Jos&eacute;e Cros</a>, 
+    <a href="http://carlit.toulouse.inra.fr/wikiz/index.php/Fr%C3%A9d%C3%A9rick_GARCIA">Fr&eacute;d&eacute;rick Garcia</a>, 
+    <a href="http://carlit.toulouse.inra.fr/wikiz/index.php/R%C3%A9gis_SABBADIN">R&eacute;gis Sabbadin</a>
+</h5>
+<br><br>
+</center>
+</p>
+
+
+<p>
+<b><font color="#3366FF"><font size=+1>Presentation</font></font></b>
+</p>
+<p>
+<font color="#000000">
+The MDPtoolbox proposes functions related to the resolution of
+discrete-time Markov Decision Processes: backwards induction, value iteration, 
+policy iteration, linear programming algorithms with some variants.<br>
+The toolbox is under BSD license.<br>
+It is currently available on several environment:  <a href="http://www.mathworks.com/products/matlab/">MATLAB</a>, <a href="http://www.gnu.org/software/octave/">GNU Octave</a>, <a href="http://www.scilab.org/">Scilab</a> and <a href="http://www.r-project.org/"">R</a>.<br><br>
+</font>
+</p>
+
+
+<p>
+<b><font color="#3366FF"><font size=+1>History</font></font></b>
+</p>
+<p>
+<font color="#000000">
+The functions were first developped with 
+<a href="http://www.mathworks.com/products/matlab/">MATLAB</a> (note that one of the functions requires the 
+<a href="http://www.mathworks.com/products/optimization">Mathworks Optimization Toolbox</a> and is not available in Scilab)
+by the <a href="http://carlit.toulouse.inra.fr/wikiz/index.php/Catégorie:MAD">decision team</a> of the 
+<a href="http://carlit.toulouse.inra.fr/wikiz">Applied Mathematics and Computer Science Unit</a> of 
+<a href="http://inra.fr">
+INRA</a> Toulouse (France).<br>
+Nowadays, the toolbox is a collaboration of persons in various organisms.<br><br>
+The last version is version 4.0.1 (January 2014) that include a <a href="QuickStart.pdf">QuickStart</a>.<br><br>
+</font>
+</p>
+
+
+<p>
+<b><font color="#3366FF"><font size=+1>Documentation</font></font></b>
+</p>
+<p>
+<font color="#000000">
+A documentation is provided with the toolbox which detail each function.<br>
+The functions description  may be adressed:<br>
+<ul>
+  <li><a href="index_category.html">by
+category</a></li>
+  <p> </p>
+  <li><a href="index_alphabetic.html"> or by alphabetical
+list.</a></li>
+</ul>
+
+<br>
+<h5>Notation used in the documentation</h5>
+<ul>
+  <li>states: set {1, 2, ..., S}</li>
+  <li>actions: set {1, 2, ..., A}</li>
+  <li>transitions: P(s,s',a) is the probability to reach state s' when the system is in state s and action a is performed by the decision maker</li>
+  <li>rewards: R(s,s',a) is the reward obtained when the system is in state s on decision epoch t and is in state s' at decision epoch t+1, with action a performed<br>
+R(s,a): reward when the system is in state s at decision epoch t and
+action a is performed by the decision maker</li>
+</ul>
+</font>
+</p>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/DOCUMENTATION.html
+<br>Page created on July 31, 2001. Last update on January 20, 2014.</font>
+</body>
+</html>

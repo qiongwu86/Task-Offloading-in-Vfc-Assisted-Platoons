@@ -1,0 +1,212 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov Decision Process, Toolbox, MATLAB">
+   <title> MDP toolbox functions</title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<br><br><br><center><b><font color="#FF0000"><font size=+2>Functions by category</font></font></b></center>
+<p><br><br><br>
+
+<table COLS=2 WIDTH="100%"  NOSAVE>
+
+<tr>
+<td>
+<p><b><font color="#000000"><font size=+1>Examples of MDP<br><br></font></font></b>
+</td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_example_rand.html">mdp_example_rand</a>
+</font></font></b></td>
+<td><font color="#000000">Generates a random MDP problem</font></td>
+</tr>
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_example_forest.html">mdp_example_forest</a>
+</font></font></b></td>
+<td><font color="#000000">Generates a MDP for a simple forest management problem</font></td>
+</tr>
+
+<tr>
+<td>
+<p><br><b><font color="#000000"><font size=+1><br>Resolution of discrete-time MDP</font></font></b>
+<p><b><font size=+1><font color="#CC66CC"><br>Finite horizon</font></font></b>
+</td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_finite_horizon.html">mdp_finite_horizon</a>
+</font></font></b></td>
+<td><font color="#000000">Solves finite-horizon MDP using backwards induction algorithm</font></td>
+</tr>
+
+<tr>
+<td>
+<p><b><font size=+1><font color="#3366FF"> </font><font color="#CC66CC"><br>Discounted criterium</font></font></b>
+</td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_LP.html">mdp_LP</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using linear programming algorithm</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_policy_iteration.html">mdp_policy_iteration</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using policy iteration algorithm</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_policy_iteration_modified.html">mdp_policy_iteration_modified</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using modified policy iteration algorithm</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_value_iteration.html">mdp_value_iteration</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using value iteration algorithm</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_value_iterationGS.html">mdp_value_iterationGS</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using Gauss-Seidel's value iteration algorithm</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_Q_learning.html">mdp_Q_learning</a>
+</font></font></b></td>
+<td><font color="#000000">Solves discounted MDP using the Q-learning algorithm (Reinforcement Learning)</font></td>
+</tr>
+
+
+<tr>
+<td>
+<p><font color="#000000"> </font><b><font color="#CC66CC"><font size=+1><br>Average criterion</font></font></b>
+</td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_relative_value_iteration.html">mdp_relative_value_iteration</a></font></font></b></td>
+<td><font color="#000000">Solves MDP with average reward using relative value iteration algorithm</font></td>
+</tr>
+
+
+<tr>
+<td>
+<p><font color="#000000"> </font><b><font color="#CC66CC"><font size=+1><br>Utilities</font></font></b>
+</td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_bellman_operator.html">mdp_bellman_operator</a>
+</font></font></b></td>
+<td><font color="#000000">Applies the Bellman operator</font>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_check.html">mdp_check</a>
+</font></font></b></td>
+<td><font color="#000000">Checks the validity of a MDP</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_check_square_stochastic.html">mdp_check_square_stochastic</a>
+</font></font></b></td>
+<td><font color="#000000">Checks if a matrix is square and stochastic</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_computePR.html">mdp_computePR</a>
+</font></font></b></td>
+<td><font color="#000000">Computes a reward matrix for any form of transition and reward functions</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_computePpolicyPRpolicy.html">mdp_computePpolicyPRpolicy</a>
+</font></font></b></td>
+<td><font color="#000000">Computes the transition matrix and the reward matrix for a fixed policy</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_eval_policy_iterative.html">mdp_eval_policy_iterative</a>
+</font></font></b></td>
+<td><font color="#000000">Evaluates a policy using an iterative method</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_eval_policy_matrix.html">mdp_eval_policy_matrix</a>
+</font></font></b></td>
+<td><font color="#000000">Evaluates a policy using matrix inversion and product</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_eval_policy_TD_0.html">mdp_eval_policy_TD_0</a>
+</font></font></b></td>
+<td><font color="#000000">Evaluates a policy using the TD(0) algorithm (Reinforcement Learning)</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_eval_policy_optimality.html">mdp_eval_policy_optimality</a>
+</font></font></b></td>
+<td><font color="#000000">Computes sets of 'near optimal' actions for each state</font></td>
+</tr>
+
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_span.html">mdp_span</a>
+</font></font></b></td>
+<td><font color="#000000">Evaluates the span of a vector</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_value_iteration_bound_iter.html">mdp_value_iteration_bound_iter</a>
+</font></font></b></td>
+<td><font color="#000000">Computes a bound on the number of iterations for the value iteration algorithm</font></td>
+</tr>
+
+<tr>
+<td><b><font color="#3366FF"><font size=+1><a href="mdp_verbose_silent.html">mdp_silent, mdp_verbose</a>
+</font></font></b></td>
+<td><font color="#000000">Calls silent or verbose running mode</font></td>
+</tr>
+
+</table>
+
+
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+
+<br><br>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div>
+</td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>File : MDPtoolbox/documentation/index_category.html
+<br>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

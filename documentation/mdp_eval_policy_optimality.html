@@ -1,0 +1,86 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_eval_policy_optimality</title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_eval_policy_optimality</font></font></b>
+<p><font color="#000000">Determines sets of 'near optimal' actions for all states.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<br><br>[multiple, optimal_actions] = mdp_eval_policy_optimality(P, R, discount, Vpolicy)
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>For some states, the evaluation of the value function may give close results for different actions. It is interesting to identify those states for which several actions have a value function very close the optimal one (i.e. less than 0.01 different). We called this the search for near optimal actions in each state. 
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA) possibly sparse.
+<ul><li><b>discount : </b>discount factor.</li></ul>
+ discount is a real which belongs to ]0; 1[.
+<ul><li><b>Vpolicy : </b>value function of the optimal policy.</li></ul>
+ Vpolicy is a (Sx1) vector.<br>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Evaluation</font></font></b>
+<font color="#000000">
+<ul><li><b>multiple :</b> existence of at least two 'nearly' optimal actions for a state.</li></ul>
+multiple is egal to true when at least one state has several epsilon-optimal actions, false if not.
+
+<ul><li><b>optimal_actions :</b> actions 'nearly' optimal for each state.</li></ul>
+optimal_actions is a (SxA) boolean matrix whose element optimal_actions(s, a)  is true if the action a is 'nearly' optimal being in state s and false if not.
+</font>
+ 
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<p><font color="#000000">
+
+>> P(:,:,1) = [ 0.5 0.5; &nbsp  0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0 1; &nbsp  0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp  -1 2 ];<br>
+>> Vpolicy = [ 42.4419; &nbsp 36.0465 ];<br>
+>> [multiple, optimal_actions] = mdp_eval_policy_optimality(P, R, 0.9, Vpolicy)<br>
+multiple =<br>
+&nbsp&nbsp     0<br>
+optimal_actions =<br>
+&nbsp&nbsp     0  &nbsp    1<br>
+&nbsp&nbsp     1   &nbsp   0<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([ 0.5 0.5;&nbsp   0.8 0.2 ]);<br>
+>> P{2} = sparse([ 0 1;&nbsp   0.1 0.9 ]);<br>
+The function call is unchanged.<br>
+</font>
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_eval_policy_optimality.html
+<br>Page created on August 31, 2009.</font>
+</body>
+</html>
+
+

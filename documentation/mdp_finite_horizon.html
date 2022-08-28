@@ -1,0 +1,103 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_finite_horizon description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_finite_horizon</font></font></b>
+<p><font color="#000000">Solves finite-horizon MDP with backwards induction algorithm.</font>
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<p><font color="#000000">
+[V, policy, cpu_time] = mdp_finite_horizon (P, R, discount, N)<br>
+[V, policy, cpu_time] = mdp_finite_horizon (P, R, discount, N, h)
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_finite_horizon applies backwards induction algorithm for
+finite-horizon MDP. The optimality equations allow to recursively evaluate function values starting from the terminal stage.
+<br>This function uses verbose and silent modes. In verbose mode, the function
+displays the current stage and the corresponding optimal policy.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA) possibly sparse.
+<ul><li><b>discount : </b>discount factor.</li></ul>
+discount is a real which belongs to ]0; 1].
+<ul><li><b>N : </b>number of stages.</li></ul>
+N is an integer greater than 0.
+<ul><li><b>h (optional) : </b>terminal reward.</li></ul>
+h is a (Sx1) vector.<br>
+By default, h = [0; 0; ... 0].
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluations</font></font></b>
+<font color="#000000">
+<ul><li><b>V :</b> value fonction.</li></ul>
+V is a (Sx(N+1)) matrix.
+Each column n is the optimal value fonction at stage n, with n = 1, ... N.<br>
+V(:,N+1) is the terminal reward.<br>
+<ul><li><b>policy : </b>optimal policy.</li></ul>
+policy is a (SxN) matrix. Each element is an integer corresponding to an
+action and each column n is the optimal policy at stage n.
+<ul><li><b>cpu_time : </b>CPU time used to run the program.</li></ul>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<font color="#999999">In grey, verbose mode display.</font><br>
+<p><font color="#000000">
+>> P(:,:,1) = [ 0.5 0.5; &nbsp 0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0   1; &nbsp 0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp -1 2 ];<br>
+<br>
+>> [V, policy, cpu_time] = mdp_finite_horizon(P, R, 0.9, 3)<br>
+<font color="#999999">stage:3      policy transpose : 2  2<br>
+stage:2      policy transpose : 2  1<br>
+stage:1      policy transpose : 2  1<br></font>
+V =<br>
+&nbsp&nbsp   15.9040   11.8000   10.0000         0<br>
+&nbsp&nbsp&nbsp&nbsp    8.6768    &nbsp 6.5600    &nbsp 2.0000         0<br>
+policy =<br>
+&nbsp&nbsp     2     2     2<br>
+&nbsp&nbsp     1     1     2<br>
+cpu_time =<br>
+&nbsp&nbsp    0.0400<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([ 0.5 0.5;&nbsp   0.8 0.2 ]);<br>
+>> P{2} = sparse([ 0 1;&nbsp   0.1 0.9 ]);<br>
+The function call is unchanged.<br>
+</font>
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td>
+<div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div>
+</td>
+</tr>
+</table>
+
+<br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_finite_horizon.html</font>
+<br><font size=-1>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

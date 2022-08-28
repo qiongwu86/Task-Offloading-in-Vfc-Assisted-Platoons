@@ -1,0 +1,91 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_example_rand description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_example_rand</font></font></b>
+<p><font color="#000000">Generates a random MDP problem.</font>
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<p>[P, R] = mdp_example_rand (S, A)<br>
+[P, R] = mdp_example_rand (S, A, is_sparse)<br>
+[P, R] = mdp_example_rand (S, A, is_sparse, mask)<br>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<p><font color="#000000">mdp_example_rand generates a transition probability
+matrix (P) and a reward matrix (R).<br>
+Optional arguments allow to define sparse matrices and pairs of states with impossible transitions.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>S</b> <b>: </b>number of states.</li></ul>
+S is an integer greater than 0.
+<ul><li><b>A : </b>number of actions.</li></ul>
+A is an integer greater than 0.
+<ul><li><b>is_sparse (optional) : </b>used to generate sparse matrices.</li></ul>
+is_sparse is a boolean. If it is set to true, sparse matrices are generated. <br>
+By default, it is set to false.
+<ul><li><b>mask (optional) : </b>indicates the possible transitions between states.</li></ul>
+mask is a (SxS) matrix composed of 0 and 1 elements (0 indicates a transition probability always equal to zero).<br>
+By default, mask is only composed of 1.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluations</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P is a 3 dimensions array (SxSxA) or a list (1xA), each list element containing a sparse matrix (SxS).
+<ul><li><font color="#000000"><b>R : </b>reward matrix.</li></ul>
+R is a 3 dimensions array (SxSxA) or a list (1xA), each list element containing a sparse matrix (SxS). Elements of R are in ]-1; 1[.
+</font>
+
+
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b>
+<p><font color="#000000">
+>> % To be able to reproduce the following example, it is necessary to init the pseudorandom number generator<br>
+>> rand('seed',0) <br>
+<br>
+>> [P, R] = mdp_example_rand (2, 2, false, [1 1; 0 1])<br>
+P(:,:,1) =<br>
+&nbsp&nbsp    0.2439 &nbsp&nbsp&nbsp   0.7561<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0 &nbsp&nbsp&nbsp   1.0000<br>
+P(:,:,2) =<br>
+&nbsp&nbsp    0.6428 &nbsp&nbsp&nbsp   0.3572<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0 &nbsp&nbsp&nbsp   1.0000<br>
+R(:,:,1) =<br>
+&nbsp&nbsp    -0.9309 &nbsp&nbsp&nbsp   0.0594<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0 &nbsp&nbsp&nbsp  0.3423<br>
+R(:,:,2) =<br>
+&nbsp&nbsp    -0.9846 &nbsp&nbsp&nbsp   -0.8663<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0 &nbsp&nbsp&nbsp  -0.1650<br>
+<br>
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+
+<br>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_example_rand.html
+<br>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

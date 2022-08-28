@@ -1,0 +1,77 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_computePR description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_computePR</font></font></b>
+<p><font color="#000000">Computes the reward associated to a state/action pair.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<p><font color="#000000"><b> </b>PR = mdp_computePR(P, R)</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_computePR computes the reward of a state/action pair, given a probability array P and a reward array possibly depending on arrival state.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA), possibly sparse.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluation</font></font></b>
+<font color="#000000">
+<ul><li><b>PR : </b>reward matrix.</li></ul>
+PR is a (SxA) matrix.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b>
+<font color="#000000">
+<p>>> P(:, :, 1) = [0.6116 0.3884;&nbsp 0 1.0000];<br>
+>> P(:, :, 2) = [0.6674 0.3326;&nbsp 0 1.0000];<br>
+>> R(:, :, 1) = [-0.2433 0.7073;&nbsp 0 0.1871];<br>
+>> R(:, :, 2) = [-0.0069 0.6433;&nbsp 0 0.2898];<br><br>
+
+>> PR = mdp_computePR(P, R)<br>
+PR =<br>
+&nbsp&nbsp    0.1259 &nbsp&nbsp   0.2094<br>
+&nbsp&nbsp    0.1871 &nbsp&nbsp   0.2898<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([0.6116 0.3884;&nbsp 0 1.0000]);<br>
+>> P{2} = sparse([0.6674 0.3326;&nbsp 0 1.0000]);<br>
+The function call is unchanged.<br>
+</font>
+
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>File : MDPtoolbox/documentation/mdp_computePR.html</font>
+<br><font size=-1>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

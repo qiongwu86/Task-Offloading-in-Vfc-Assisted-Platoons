@@ -1,0 +1,141 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_value_iterationGS description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_value_iterationGS</font></font></b>
+<p><font color="#000000">Solves discounted MDP with Gauss-Seidel's value iteration algorithm.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<p> [policy, iter, cpu_time] = mdp_value_iterationGS (P, R, discount)
+<br> [policy, iter, cpu_time] = mdp_value_iterationGS (P, R, discount, epsilon)
+<br> [policy, iter, cpu_time] = mdp_value_iterationGS (P, R, discount, epsilon, max_iter)
+<br> [policy, iter, cpu_time] = mdp_value_iterationGS (P, R, discount, epsilon, max_iter, V0)
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_value_iterationGS applies Gauss-Seidel's value iteration
+algorithm to solve discounted MDP. The algorithm
+consists, like value iteration, in solving Bellman's equation
+iteratively V<sub>n+1</sub>(s) calculation is modified. The algorithm
+uses V<sub>n+1</sub>(s) instead of V<sub>n</sub>(s) whenever this value has been
+calculated. In this way, convergence speed is improved.
+<br>Iterating is stopped when an epsilon-optimal policy is found or 
+after a specified  number (max_iter) of iterations.
+<br>This function uses verbose and silent modes. In verbose mode, the function
+displays the variation of V (value function) for each iteration and the condition which stopped iterations: epsilon-policy found or maximum number of iterations reached.
+</font>
+
+
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA) possibly sparse.
+<ul><li><b>discount : </b>discount factor.</li></ul>
+discount is a real which belongs to  ]0; 1].<br>
+For discount equals to 1, a warning recalls to check conditions of convergence.
+<ul><li><b>epsilon (optional) : </b>search of an epsilon-optimal policy.</li></ul>
+epsilon is a real in ]0; 1].<br>
+By default, epsilon is set to 0.01.
+<ul><li><b>max_iter (optional) : </b>maximum number of iterations to be done.</li></ul>
+max_iter is an integer greater than 0.
+If the value given in argument is greater than a computed bound, a warning informs that the computed bound will be considered.<br>
+By default, if discount is not equal to 1, a bound for max_iter is computed, if not  max_iter is set to 1000.
+<ul><li><b>V0 (optional) : </b>starting value function.</li></ul>
+V0 is a (Sx1) vector.<br>
+By default, V0 is only composed of 0 elements.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluations</font></font></b>
+<font color="#000000">
+<ul><li><b>policy : </b>epsilon-optimal policy.</li></ul>
+policy is a (Sx1) vector. Each element is an integer
+corresponding to an action which maximizes the value function.
+<ul><li><b>iter : </b>number of done iterations.</li></ul>
+<ul><li><b>cpu_time : </b>CPU time used to run the program.</li></ul>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<font color="#999999">In grey, verbose mode display.</font><br>
+<p><font color="#000000">
+>> P(:,:,1) = [ 0.5 0.5; &nbsp 0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0   1; &nbsp 0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp -1 2 ];<br>
+<br>
+>> [policy, iter, cpu_time] = mdp_value_iterationGS(P, R, 0.9)<br>
+<font color="#999999">&nbsp&nbsp  Iteration  &nbsp V_variation<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      1     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    3.8<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      2     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.4464<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      3     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.36962<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      4     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.30604<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      5     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.25341<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      6     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.20982<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      7     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.17373<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      8     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.14385<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      9     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp    0.11911<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      10    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.09862<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      11    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.081658<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      12    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.067613<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      13    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.055983<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      14    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.046354<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      15    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.038381<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      16    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.03178<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      17    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.026314<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      18    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.021788<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      19    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.01804<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      20    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.014937<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      21    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.012368<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      22    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.010241<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      23    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0084793<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      24    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0070209<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      25    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0058133<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      26    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0048134<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      27    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0039855<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      28    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     0.0033<br>
+MDP Toolbox : iterations stopped by maximum number of iteration condition</font><br>
+policy =<br>
+&nbsp&nbsp     2<br>
+&nbsp&nbsp     1<br>
+iter =<br>
+&nbsp&nbsp    28<br>
+cpu_time =<br>
+&nbsp&nbsp    0.1900<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([ 0.5 0.5;&nbsp   0.8 0.2 ]);<br>
+>> P{2} = sparse([ 0 1;&nbsp   0.1 0.9 ]);<br>
+The function call is unchanged.<br>
+</font>
+
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_value_iterationGS.html
+<br>Page created on July 31, 2001. Last update on October 31, 2012.</font>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_check_square_stochastic description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_check_square_stochastic</font></font></b>
+<p><font color="#000000">Checks whether a matrix is square and stochastic.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<p><font color="#000000"><b> </b>error_msg = mdp_check_square_stochastic (T)</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_check_square_stochastic checks if the  matrix (T) is square and stochastic (sums of rows equal to 1).<br>
+If it is the case, the function returns an empty error message. In the opposite case, the function returns an
+error message describing the problem.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>T : </b>a matrix.</li></ul>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Evaluation</font></font></b>
+<font color="#000000">
+<ul><li><b>error_msg : </b>error message.</li></ul>
+error_msg is a character string which is empty if the matrix is square and stochastic. In the opposite case, the variable contains problem information.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b>
+<font color="#000000">
+<p>>> T = [0.6116 0.3884;&nbsp 0 1.0000];<br>
+<br>
+>> error_msg = mdp_check_square_stochastic (T)<br>
+error_msg =<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp ''<br>
+</font>
+
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>File : MDPtoolbox/documentation/mdp_check_square_stochastic.html</font>
+<br><font size=-1>Page created on July 31, 2001. Last update on August 31, 2009.</font>
+</body>
+</html>

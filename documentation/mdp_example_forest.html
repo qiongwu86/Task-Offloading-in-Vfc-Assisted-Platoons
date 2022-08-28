@@ -1,0 +1,131 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_example_forest description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_example_forest</font></font></b>
+<p><font color="#000000">Generates a simple MDP example of forest management problem.</font>
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<p>[P, R] = mdp_example_forest ()<br>
+[P, R] = mdp_example_forest (S)<br>
+[P, R] = mdp_example_forest (S, r1)<br>
+[P, R] = mdp_example_forest (S, r1, r2)<br>
+[P, R] = mdp_example_forest (S, r1, r2, p)
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<p><font color="#000000">mdp_example_forest generates a transition probability
+(SxSxA) array P and a reward (SxA) matrix R that model the following problem.<br>
+A forest is managed by two actions: Wait and Cut.<br>
+An action is decided each year with first the objective to maintain an old forest for wildlife and second to make money selling cut wood. <br>
+Each year there is a probability p that a fire burns the forest.<br><br>
+Here is the modelisation of this problem.<br>
+Let {1, ... S} be the states of the forest. the Sth state being the oldest.<br>
+Let Wait be action 1 and Cut action 2.<br>
+After a fire, the forest is in the youngest state, that is state 1.<br>  
+The transition matrix P of the problem can then be defined as follows.<br>   
+<br>   
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp p&nbsp 1-p&nbsp 0.......0&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp p&nbsp 1-p&nbsp 0.......0&nbsp  |<br>   
+P(:,:,1) = |&nbsp .&nbsp&nbsp&nbsp  .&nbsp&nbsp&nbsp&nbsp  .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  .&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp&nbsp&nbsp  .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        .&nbsp&nbsp 0&nbsp  | <br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp&nbsp&nbsp  .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         1-p&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp p&nbsp&nbsp  0&nbsp  0..0 1-p&nbsp | <br>
+<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 1&nbsp 0........0&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp          .&nbsp |<br>
+P(:,:,2) = &nbsp |&nbsp .&nbsp .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp          .&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp          .&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp .&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp          .&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 1&nbsp 0........0&nbsp |<br> 
+<br>
+The reward matrix R is defined as follows.<br>
+<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 0&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp&nbsp |<br>
+R(:,1) = &nbsp |&nbsp .&nbsp&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 0&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp r1 |<br>
+<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 0&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 1&nbsp |<br>
+R(:,2) = &nbsp |&nbsp .&nbsp&nbsp |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp .&nbsp&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp 1&nbsp  |<br>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp r2 |<br>
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>S (optional):</b> number of states</li></ul>
+S is an integer greater than 0.<br>
+By default, S is set to 3.
+<ul><li><b>r1 (optional): </b>reward when forest is in the oldest state and action Wait is performed</li></ul>
+r1 is a real greater than 0.<br>
+By default, r1 is set to 4.
+<ul><li><b>r2 (optional): </b>reward when forest is in the oldest state and action Cut is performed</li></ul>
+r2 is a real greater than 0.<br>
+By default, r2 is set to 2.
+<ul><li><b>p (optional): </b>probability of wildfire occurence</li></ul>
+p is a real in ]0, 1[.<br>
+By default, p is set to 0.1.
+</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Evaluations</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P is a (SxSxA) array.<br>
+
+<ul><li><font color="#000000"><b>R : </b>reward matrix.</li></ul>
+R is a (SxA) matrix.<br>
+
+</font>
+
+
+
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b>
+<p><font color="#000000">
+>> [P, R]=mdp_example_forest()<br>
+P(:,:,1) =<br>
+&nbsp&nbsp    0.1000&nbsp&nbsp    0.9000&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0<br>
+&nbsp&nbsp    0.1000&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0&nbsp&nbsp    0.9000<br>
+&nbsp&nbsp    0.1000&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp         0&nbsp&nbsp    0.9000<br>
+P(:,:,2) =<br>
+&nbsp&nbsp     1&nbsp&nbsp     0&nbsp&nbsp     0<br>
+&nbsp&nbsp     1&nbsp&nbsp     0&nbsp&nbsp     0<br>
+&nbsp&nbsp     1&nbsp&nbsp     0&nbsp&nbsp     0<br>
+R =<br>
+&nbsp&nbsp     0&nbsp&nbsp     0<br>
+&nbsp&nbsp     0&nbsp&nbsp     1<br>
+&nbsp&nbsp     4&nbsp&nbsp     2<br>
+<br>
+
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+
+<br>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_example_forest.html
+<br>Page created on August 31, 2009.</font>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta name="keywords" content="Markov decision process, Toolbox, MATLAB">
+   <title> mdp_eval_policy_iterative description </title>
+</head>
+<body bgcolor="#FFFFFF">
+
+<center><table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr BGCOLOR="#FFFFCC" NOSAVE>
+<td BGCOLOR="#FFFFCC" NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table></center>
+
+<p><b><font color="#FF0000"><font size=+2>mdp_eval_policy_iterative</font></font></b>
+<p><font color="#000000">Evaluates a policy using iterations of the Bellman operator.</font>
+
+
+<p><b><font color="#3366FF"><font size=+1>Syntax</font></font></b>
+<font color="#000000">
+<p>Vpolicy = mdp_eval_policy_iterative(P, R, discount, policy)
+<br>Vpolicy = mdp_eval_policy_iterative(P, R, discount, policy, V0)
+<br>Vpolicy = mdp_eval_policy_iterative(P, R, discount, policy, V0, epsilon)
+<br>Vpolicy = mdp_eval_policy_iterative(P, R, discount, policy, V0, epsilon, max_iter)
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Description</font></font></b>
+<font color="#000000">
+<p>mdp_eval_policy_iterative evaluates the value fonction associated to a policy applying iteratively the Bellman operator.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Arguments</font></font></b>
+<font color="#000000">
+<ul><li><b>P : </b>transition probability array.</li></ul>
+P can 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS).
+<ul><li><b>R : </b>reward array.</li></ul>
+R can be a 3 dimensions array (SxSxA) or a cell array (1xA), each cell containing a sparse matrix (SxS) or a 2D array (SxA) possibly sparse.
+<ul><li><b>discount : </b>discount factor.</li></ul>
+ discount is a real which belongs to [0; 1[.
+<ul><li><b>policy : </b>a policy.</li></ul>
+policy is a (Sx1) vector. Each element is an integer corresponding to an action.
+<ul><li><b>V0 (optional) : </b>starting point.</li></ul>
+V0 is a (Sx1) vector representing an inital guess of the value function.<br>
+By default, V0 is only composed of 0 elements.
+<ul><li><b>epsilon (optional) : </b>search for an epsilon-optimal policy.</li></ul>
+epsilon is a real greater than 0.<br>
+By default, epsilon = 0.01.
+<ul><li><b>max_iter (optional) : </b>maximum number of iterations.</li></ul>
+ max_iter is an integer greater than 0.
+If the value given in argument is greater than a computed bound, a warning informs that the computed bound will be used instead.<br>
+By default,  max_iter = 1000.
+</font>
+
+<p><b><font color="#3366FF"><font size=+1>Evaluation</font></font></b>
+<font color="#000000">
+<ul><li><b>Vpolicy :</b> value fonction.</li></ul>
+ Vpolicy is a (Sx1) vector.
+
+</font>
+ 
+<p><b><font color="#3366FF"><font size=+1>Example</font></font></b><br>
+<font color="#999999">In grey, verbose mode display.</font><br>
+<p><font color="#000000">
+
+
+>> P(:,:,1) = [ 0.5 0.5; &nbsp 0.8 0.2 ];<br>
+>> P(:,:,2) = [ 0 1; &nbsp 0.1 0.9 ];<br>
+>> R = [ 5 10; &nbsp -1 2 ];<br>
+>> policy = [2; &nbsp 1];<br><br>
+
+>> Vpolicy = mdp_eval_policy_iterative(P, R, 0.8, policy)<br>
+<font color="#999999">&nbsp&nbsp  Iteration &nbsp   V_variation<br>
+&nbsp&nbsp&nbsp&nbsp      1    &nbsp&nbsp&nbsp&nbsp     10<br>
+&nbsp&nbsp&nbsp&nbsp      2    &nbsp&nbsp&nbsp&nbsp     6.24<br>
+&nbsp&nbsp&nbsp&nbsp      3    &nbsp&nbsp&nbsp&nbsp     4.992<br>
+&nbsp&nbsp&nbsp&nbsp      4    &nbsp&nbsp&nbsp&nbsp     3.2727<br>
+&nbsp&nbsp&nbsp&nbsp      5    &nbsp&nbsp&nbsp&nbsp     2.6182<br>
+&nbsp&nbsp&nbsp&nbsp      6    &nbsp&nbsp&nbsp&nbsp     1.7993<br>
+&nbsp&nbsp&nbsp&nbsp      7    &nbsp&nbsp&nbsp&nbsp     1.4394<br>
+&nbsp&nbsp&nbsp&nbsp      8    &nbsp&nbsp&nbsp&nbsp     1.0306<br>
+&nbsp&nbsp&nbsp&nbsp      9    &nbsp&nbsp&nbsp&nbsp     0.82446<br>
+&nbsp&nbsp&nbsp&nbsp      10   &nbsp&nbsp&nbsp&nbsp      0.61003<br>
+&nbsp&nbsp&nbsp&nbsp      11   &nbsp&nbsp&nbsp&nbsp      0.48802<br>
+&nbsp&nbsp&nbsp&nbsp      12   &nbsp&nbsp&nbsp&nbsp      0.37013<br>
+&nbsp&nbsp&nbsp&nbsp      13   &nbsp&nbsp&nbsp&nbsp      0.2961<br>
+&nbsp&nbsp&nbsp&nbsp      14   &nbsp&nbsp&nbsp&nbsp      0.22857<br>
+&nbsp&nbsp&nbsp&nbsp      15   &nbsp&nbsp&nbsp&nbsp      0.18286<br>
+&nbsp&nbsp&nbsp&nbsp      16   &nbsp&nbsp&nbsp&nbsp      0.14288<br>
+&nbsp&nbsp&nbsp&nbsp      17   &nbsp&nbsp&nbsp&nbsp      0.1143<br>
+&nbsp&nbsp&nbsp&nbsp      18   &nbsp&nbsp&nbsp&nbsp      0.090049<br>
+&nbsp&nbsp&nbsp&nbsp      19   &nbsp&nbsp&nbsp&nbsp      0.072039<br>
+&nbsp&nbsp&nbsp&nbsp      20   &nbsp&nbsp&nbsp&nbsp      0.05706<br>
+&nbsp&nbsp&nbsp&nbsp      21   &nbsp&nbsp&nbsp&nbsp      0.045648<br>
+&nbsp&nbsp&nbsp&nbsp      22   &nbsp&nbsp&nbsp&nbsp      0.036285<br>
+&nbsp&nbsp&nbsp&nbsp      23   &nbsp&nbsp&nbsp&nbsp      0.029028<br>
+&nbsp&nbsp&nbsp&nbsp      24   &nbsp&nbsp&nbsp&nbsp      0.023126<br>
+&nbsp&nbsp&nbsp&nbsp      25   &nbsp&nbsp&nbsp&nbsp      0.018501<br>
+&nbsp&nbsp&nbsp&nbsp      26   &nbsp&nbsp&nbsp&nbsp      0.014762<br>
+&nbsp&nbsp&nbsp&nbsp      27   &nbsp&nbsp&nbsp&nbsp      0.011809<br>
+&nbsp&nbsp&nbsp&nbsp      28   &nbsp&nbsp&nbsp&nbsp      0.0094313<br>
+&nbsp&nbsp&nbsp&nbsp      29   &nbsp&nbsp&nbsp&nbsp      0.0075451<br>
+&nbsp&nbsp&nbsp&nbsp      30   &nbsp&nbsp&nbsp&nbsp      0.0060295<br>
+&nbsp&nbsp&nbsp&nbsp      31   &nbsp&nbsp&nbsp&nbsp      0.0048236<br>
+&nbsp&nbsp&nbsp&nbsp      32   &nbsp&nbsp&nbsp&nbsp      0.0038562<br>
+&nbsp&nbsp&nbsp&nbsp      33   &nbsp&nbsp&nbsp&nbsp      0.0030849<br>
+&nbsp&nbsp&nbsp&nbsp      34   &nbsp&nbsp&nbsp&nbsp      0.0024668<br>
+&nbsp&nbsp&nbsp&nbsp      35   &nbsp&nbsp&nbsp&nbsp      0.0019735<br>
+&nbsp&nbsp&nbsp&nbsp      36   &nbsp&nbsp&nbsp&nbsp      0.0015783<br>
+&nbsp&nbsp&nbsp&nbsp      37   &nbsp&nbsp&nbsp&nbsp      0.0012627<br>
+&nbsp&nbsp&nbsp&nbsp      38   &nbsp&nbsp&nbsp&nbsp      0.0010099<br>
+&nbsp&nbsp&nbsp&nbsp      39   &nbsp&nbsp&nbsp&nbsp      0.00080795<br>
+&nbsp&nbsp&nbsp&nbsp      40   &nbsp&nbsp&nbsp&nbsp      0.00064629<br>
+&nbsp&nbsp&nbsp&nbsp      41   &nbsp&nbsp&nbsp&nbsp      0.00051703<br>
+&nbsp&nbsp&nbsp&nbsp      42   &nbsp&nbsp&nbsp&nbsp      0.00041359<br>
+&nbsp&nbsp&nbsp&nbsp      43   &nbsp&nbsp&nbsp&nbsp      0.00033087<br>
+&nbsp&nbsp&nbsp&nbsp      44   &nbsp&nbsp&nbsp&nbsp      0.00026469<br>
+&nbsp&nbsp&nbsp&nbsp      45   &nbsp&nbsp&nbsp&nbsp      0.00021175<br>
+&nbsp&nbsp&nbsp&nbsp      46   &nbsp&nbsp&nbsp&nbsp      0.00016939<br>
+&nbsp&nbsp&nbsp&nbsp      47   &nbsp&nbsp&nbsp&nbsp      0.00013552<br>
+&nbsp&nbsp&nbsp&nbsp      48   &nbsp&nbsp&nbsp&nbsp      0.00010841<br>
+&nbsp&nbsp&nbsp&nbsp      49   &nbsp&nbsp&nbsp&nbsp      8.6728e-05<br>
+MDP Toolbox: iterations stopped, epsilon-optimal value function<br></font>
+
+Vpolicy =<br>
+&nbsp&nbsp   23.1704<br>
+&nbsp&nbsp   16.4631<br>
+<br>
+In the above example, P can be a cell array containing sparse matrices:<br>
+>> P{1} = sparse([ 0.5 0.5;&nbsp   0.8 0.2 ]);<br>
+>> P{2} = sparse([ 0 1;&nbsp   0.1 0.9 ]);<br>
+The function call is unchanged.<br>
+</font>
+
+<br><br>
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 COLS=2 WIDTH="100%" BGCOLOR="#FFFFCC" NOSAVE >
+<tr NOSAVE>
+<td NOSAVE><b>MDP Toolbox for MATLAB</b></td>
+<td><div align=right><a href="DOCUMENTATION.html"><img SRC="arrow.gif" height=23 width=26></a></div></td>
+</tr>
+</table>
+
+<br><br>
+<hr WIDTH="100%">
+<font size=-1>MDPtoolbox/documentation/mdp_eval_policy_iterative.html
+<br>Page created on August 31, 2009.</font>
+</body>
+</html>
