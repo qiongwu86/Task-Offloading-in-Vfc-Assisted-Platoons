@@ -70,7 +70,7 @@ else
     [V, policy] = max(Q,[],2);  % 返回值函数最大值，以及相对应动作索引。-1，索引为1,matlab下标从1开始
  
     % 新添加
-    K = 4;
+    K = 6;
     [s] = initial_state_platoon(K); 
     for it = 1: S
         if strcmp(s{it,4},'A') && s{it,5} == 0 && policy(it) == 1

@@ -57,7 +57,7 @@ cpu_time = cputime;
 global mdp_VERBOSE;
 
 % check of arguments
-if iscell(P); 
+if iscell(P);    
     S = size(P{1},1); 
 else
     S = size(P,1);

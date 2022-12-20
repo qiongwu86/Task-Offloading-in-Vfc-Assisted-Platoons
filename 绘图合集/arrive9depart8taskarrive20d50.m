@@ -4,7 +4,7 @@ M = 4;  % 车队中车辆总数
 
 lambda_f =9;     %车辆到达率【秒】
 u_f = 8;            %车辆离开率【秒】
-lambda_p = 15;        %任务到达率【秒】
+lambda_p = 20;        %任务到达率【秒】
 
 % 任务离开率  u_p = f/d 单位为s
 f0 = 560;  %===============================550不行
@@ -15,17 +15,17 @@ f3 = 620;
 f4 = 650;
 d =  30;  
 %-------------------------------------------------------------------
-A1 = [0.4074, 0.3065, 0.2857, 0.2437, 0.2519, 0.2831, 0.3141, ];  % 车载云
-A2 = [0.1852, 0.1452, 0.1071, 0.0964, 0.1090, 0.1231, 0.1597, ];
-A3 = [0.4074, 0.5484, 0.6071, 0.6599, 0.6391, 0.5938, 0.5262, ];
+A1 = [0, 0 0.0063, 0.0074, 0.0136, 0.0137, 0.0104,];  % 车载云
+A2 = [0.1351, 0.1059, 0.0949, 0.0849, 0.0773, 0.0918, 0.1055, ];
+A3 = [0.8649, 0.8941, 0.8987, 0.9077, 0.9091, 0.8945, 0.8841, ];
 
-Case0 = [0.9036, 0.8797, 0.8671, 0.8491, 0.8583, 0.8747, 0.8902, ];  
-Case1 = [0.0703, 0.0969, 0.1111, 0.1310, 0.1231, 0.1080, 0.0936, ];
-Case2 = [0.0260, 0.0234, 0.0218, 0.0199, 0.0185, 0.0173, 0.0162, ];
+Case0 = [0.8753, 0.8410, 0.8187, 0.7970, 0.7752, 0.8104, 0.8403, ];  
+Case1 = [0.0981, 0.1351, 0.1591, 0.1827, 0.2061, 0.1722, 0.1433, ];
+Case2 = [0.0265, 0.0238, 0.0222, 0.0202, 0.0187, 0.0175, 0.0164, ];
 
 % reward of system
-rewardSMDP_part = [7.2218e+05, 1.4997e+06, 2.7769e+06, 4.5717e+06, 6.8112e+06, 9.4196e+06, 1.2166e+07, ];
-GA_bian =         [3.8807e+04, 6.1762e+04, 9.2465e+04, 1.2976e+05, 1.7453e+05, 0.1111e+05, 2.9577e+05, ];
+rewardSMDP_part = [4.6965e+05, 9.5452e+05, 1.8183e+06, 3.1712e+06, 5.0450e+06, 7.3409e+06, 9.7793e+06, ];
+GA_bian =         [4.1103e+04, 6.5547e+04, 9.8244e+04, 1.3796e+05, 1.8576e+05, 2.4455e+05, 3.1506e+05, ];
 gap=1;
 begin = 4; endNum = 10;
 
@@ -39,8 +39,8 @@ plot(y, A3, '-rs','linewidth',2);
 set(gca,'xtick',begin:1:endNum);
 %ylim([0.08,0.6])
 legend('A1','A2','A3');
-xlabel('最大车辆数目');
-ylabel('车载雾中动作概率'); 
+xlabel('Maximum number of vehicles');
+ylabel('Action probability'); 
 
 
 figure(3);
@@ -54,8 +54,8 @@ plot(y, Case2, '-cs','linewidth',2);
 % set(gca,'xtick',9:1:13);
 set(gca,'xtick',begin:1:endNum);
 legend('Case 0','Case 1','Case 2');
-xlabel('最大车辆数目');
-ylabel('动作概率'); 
+xlabel('Maximum number of vehicles');
+ylabel('Action probability'); 
 
 
 % reward--------要做归一化处理，不然图形不好看,图4没做归一化处理，图5做了
@@ -65,9 +65,9 @@ plot(y, rewardSMDP_part, '-bp','linewidth',2);
 hold on
 plot(y, GA_bian, '-cd','linewidth',2);
 set(gca,'xtick',begin:1:endNum);
-legend('SMDP策略','贪婪策略');
-xlabel('最大车辆数目');
-ylabel('系统长期收益');
+legend('our scheme','greedy scheme');
+xlabel('Maximum number of vehicles');
+ylabel('Long-term reward');
 
 geshu=endNum - begin + 1;      %归一化
 for i=1:geshu
@@ -80,6 +80,6 @@ t=begin:1:endNum;
 plot(t,  discounted_SMDP, '-r^','linewidth',2);
 hold on
 plot(t,  GA_unif, '-bd','linewidth',2);
-legend('SMDP策略','贪婪策略');
-xlabel('最大车辆数目');
-ylabel('系统长期收益');
+legend('our scheme','greedy scheme');
+xlabel('Maximum number of vehicles');
+ylabel('Long-term reward');

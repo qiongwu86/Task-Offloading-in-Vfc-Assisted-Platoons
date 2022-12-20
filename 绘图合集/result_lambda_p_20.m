@@ -80,6 +80,6 @@ t=begin:1:endNum;
 plot(t,  discounted_SMDP, '-r^','linewidth',2);
 hold on
 plot(t,  GA_unif, '-bd','linewidth',2);
-legend('our scheme','greedy scheme');
+legend('our strategy','greedy strategy');
 xlabel('Maximum number of vehicles');
 ylabel('Long-term reward');

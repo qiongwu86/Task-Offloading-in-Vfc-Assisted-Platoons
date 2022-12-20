@@ -5,12 +5,12 @@ clear all;
 tic;
 
 %！！！！ 【注意，将V3_mdp_bellman_operator_calculateValue中的K值，换成对应的】
-K = 4;   % 【车载云】中，车辆总数【车载云】 (4-10)  
+K = 6;   % 【车载云】中，车辆总数【车载云】 (4-10)  
 M = 4;  % 车队中车辆总数
 
 lambda_f = 9;     %车辆到达率【秒】
 u_f = 8;            %车辆离开率【秒】
-lambda_p = 20;        %任务到达率【秒】
+lambda_p = 20;        %任务到达率【秒】 变化15-25
 
 % 任务离开率  u_p = f/d 单位为s
 f0 = 350;  %==========530-600
@@ -19,13 +19,15 @@ f1 = 600;   %分配给头车
 f2 = 660;  
 f3 = 620; 
 f4 = 650;
-d =  40;  
+d =  45; 
+d
 %% 参数获取 
 [s, P, R, discount] = data_input_platoon(K,M,lambda_p,lambda_f,u_f,f0,f1,f2,f3,f4,d);
-
+sprintf('这里参数获取结束')
 %% 值迭代
 epsilon = 10;
 max_iter = 200;
+
  [Q, V, policy, iter, cpu_time] = mdp_value_iteration(P, R, discount, epsilon, max_iter); 
 
 %记录最优动作
