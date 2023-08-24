@@ -1,4 +1,4 @@
-function [Q, V, policy] = V3_mdp_bellman_operator_calculateValue(P, PR, discount, Vprev)
+function [Q, V, policy] = V3_mdp_bellman_operator_calculateValue(P, PR, discount, Vprev, K)
 
 % lhx
 % [m1,n1]=size(PR);
@@ -67,19 +67,22 @@ else
         end
     end
     
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     [V, policy] = max(Q,[],2);  % 返回值函数最大值，以及相对应动作索引。-1，索引为1,matlab下标从1开始
- 
-    % 新添加
-    K = 6;
-    [s] = initial_state_platoon(K); 
-    for it = 1: S
-        if strcmp(s{it,4},'A') && s{it,5} == 0 && policy(it) == 1
-            V(it,1) = Q(it,2);
-            policy(it) = 2;   % 因为数字先后顺序产生的结果，所以此处纠正； policy:存放最佳动作的索引
-        end
-        if strcmp(s{it,4},'F-1') && policy(it) == 2
-            V(it,1) = Q(it,1);
-            policy(it) = 1;
-        end
-    end
-end; 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     % 新添加
+%     [s] = initial_state_platoon(K); 
+%     policy = randi([1, 9], size(Q, 1), 1);
+%     V = Q(sub2ind(size(Q), (1:size(Q, 1))', policy));
+%     for it = 1: S
+%         if strcmp(s{it,4},'A') && s{it,5} == 0 && policy(it) == 1
+%             V(it,1) = Q(it,2);
+%             policy(it) = 2;   % 因为数字先后顺序产生的结果，所以此处纠正； policy:存放最佳动作的索引
+%         end
+%         if strcmp(s{it,4},'F-1') && policy(it) == 2
+%             V(it,1) = Q(it,1);
+%             policy(it) = 1;
+%         end
+%     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+end 

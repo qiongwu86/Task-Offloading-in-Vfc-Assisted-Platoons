@@ -57,11 +57,11 @@ cpu_time = cputime;
 global mdp_VERBOSE;
 
 % check of arguments
-if iscell(P);    
+if iscell(P)    
     S = size(P{1},1); 
 else
     S = size(P,1);
-end;
+end
 
 if discount < 0 || discount > 1
     disp('--------------------------------------------------------')
@@ -86,34 +86,34 @@ else
         disp('MDP Toolbox WARNING: check conditions of convergence.')
         disp('With no discount, convergence is not always assumed.')
         disp('--------------------------------------------------------')
-    end;
+    end
     
     PR = mdp_computePR(P,R);    %PR = R
     
     % initialization of optional arguments
-    if nargin < 6; 
+    if nargin < 6 
         V0 = zeros(S,1); 
-    end;
+    end
     
-    if nargin < 4; 
+    if nargin < 4
         epsilon = 0.01; 
-    end;
+    end
     % compute a bound for the number of iterations
     if discount ~= 1
        computed_max_iter = mdp_value_iteration_bound_iter(P, R, discount, epsilon, V0);
-    end;   
+    end   
     if nargin < 5
         if discount ~= 1
             max_iter = computed_max_iter;     % 不执行
         else
             max_iter = 1000;
-        end;
+        end
     else
         if discount ~= 1 && max_iter > computed_max_iter
             disp(['MDP Toolbox WARNING: max_iter is bounded by ' num2str(computed_max_iter,'%12.1f') ])
             max_iter = computed_max_iter;
-        end;
-    end;
+        end
+    end
     
     % computation of threshold of variation for V for an epsilon-optimal policy
     if discount ~= 1
@@ -121,38 +121,48 @@ else
         thresh = epsilon * (1-discount)/2*discount;
     else 
         thresh = epsilon;
-    end;
+    end
     
-    if mdp_VERBOSE; disp('  Iteration    V_variation'); end;
+    if mdp_VERBOSE; disp('  Iteration    V_variation'); end
     
     iter = 0;
     V = V0;
+    K = 10;
     is_done = false;
+
+%     % wwh
+%     for i =1:1
+%         [Q, V, policy] = V3_mdp_bellman_operator_calculateValue(P,PR,discount,V,K);
+%     end
+
+
+%  原来是她的代码
     while ~is_done
         iter = iter + 1;
         Vprev = V;   % 看一下什么时候执行，应该每一次都要执行
         
-        [Q, V, policy] = V3_mdp_bellman_operator_calculateValue(P,PR,discount,V);
+        [Q, V, policy] = V3_mdp_bellman_operator_calculateValue(P,PR,discount,V, K);
         
      %   variation = mdp_span(V - Vprev);  原
      variation = sum(abs(V-Vprev))/S;
    
-        if mdp_VERBOSE; 
+        if mdp_VERBOSE 
             disp(['      ' num2str(iter,'%5i') '         ' num2str(variation)]); 
-        end;
+        end
         if variation < thresh 
             is_done = true; 
             if mdp_VERBOSE 
                 disp('MDP Toolbox: iterations stopped, epsilon-optimal policy found')
-            end;
+            end
         elseif iter == max_iter
             is_done = true; 
             if mdp_VERBOSE 
                 disp('MDP Toolbox: iterations stopped by maximum number of iteration condition')
-            end;
-        end;
-    end;
-    
-end;
+            end
+        end
+    end
+
+
+end
 
 cpu_time = cputime - cpu_time;

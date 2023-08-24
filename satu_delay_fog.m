@@ -14,21 +14,27 @@ ED = EN*Tslot/1000000;    %单位s------传输一个子任务消耗的时延
 
 % 求到达率和传输时间
    D_access = a*ED;  %单位s
-
 T_vehicular = D_access*1000;  %ms
-if (s_current{1,1} == 6)&& (a==1)
-    sprintf('K=6,a=1')
-    T_vehicular
-  
+% if T_vehicular < 0
+%     T_vehicular
+% end
+if T_vehicular <= 0
+    T_vehicular = 0;
 end
-if (s_current{1,1} == 6)&& (a==2)
-    sprintf('K=6,a=2')
-    T_vehicular
-  
 end
-if (s_current{1,1} == 6)&& (a==3)
-    sprintf('K=6,a=3')
-    T_vehicular
-  
-end
+% if (s_current{1,1} == 6)&& (a==1)
+%     sprintf('K=6,a=1')
+%     T_vehicular
+%   
+% end
+% if (s_current{1,1} == 6)&& (a==2)
+%     sprintf('K=6,a=2')
+%     T_vehicular
+%   
+% end
+% if (s_current{1,1} == 6)&& (a==3)
+%     sprintf('K=6,a=3')
+%     T_vehicular
+%   
+% end
 

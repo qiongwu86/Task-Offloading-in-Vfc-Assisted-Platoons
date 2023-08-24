@@ -1,0 +1,32 @@
+clc;
+clear;
+
+
+delay_all = ...
+[[58.4302, 57.3702, 68.0444 ]
+[59.5186, 58.6923, 65.5404 ]
+[61.069, 60.2186, 69.8723 ]
+[62.3933, 61.704, 69.3562 ]
+[63.581, 63.1625, 75.4019 ]
+[64.9744, 64.6464, 75.9623 ]
+[66.5153, 66.1784, 76.0697 ]
+[68.0562, 67.7104, 79.7762 ]
+[69.5971, 69.2423, 80.675 ]
+[70.7638, 70.7125, 81.7947 ]
+[72.3452, 72.2926, 84.6243 ]];
+delay_all = delay_all';
+
+
+p=figure(1);
+t =35 : 45;
+p1 = plot(t,  delay_all(1,:), '-r^','linewidth',2);
+hold on
+p2 = plot(t,  delay_all(2,:), '-bd','linewidth',2);
+hold on
+p3 = plot(t,  delay_all(3,:), '-g>','linewidth',2);
+
+legend([p1, p2, p3], 'our strategy','greedy strategy,',"equal strategy")
+
+xlabel('Required CPU cycles to process each task');
+ylabel('Delay of offloading a task (ms)');
+

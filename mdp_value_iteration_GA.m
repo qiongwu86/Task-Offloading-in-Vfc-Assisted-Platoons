@@ -112,7 +112,7 @@ else
         thresh = epsilon;
     end;
     
-    if mdp_VERBOSE; disp('  Iteration    V_variation'); end;
+    if mdp_VERBOSE; disp('  Iteration    V_variation'); end
     
     iter = 0;
     V = V0 ;
@@ -126,9 +126,9 @@ else
      %   variation = mdp_span(V - Vprev);  ԭ
      variation = sum(abs(V-Vprev))/S;
    
-        if mdp_VERBOSE; 
-            disp(['      ' num2str(iter,'%5i') '         ' num2str(variation)]); 
-        end;
+%         if mdp_VERBOSE; 
+%             disp(['      ' num2str(iter,'%5i') '         ' num2str(variation)]); 
+%         end;
         if variation < thresh 
             is_done = true; 
             if mdp_VERBOSE 

@@ -1,7 +1,7 @@
 %% Platoon
 %%------------注意，那些地方d/f要乘以1000
 %% 对于每个状态，都走一遍动作
-function [s, P, R, discount] = data_input_platoon(K,M,lambda_p,lambda_f,u_f,f0,f1,f2,f3,f4,d)
+function [s, P, R, discount, delay_all] = data_input_platoon(K,M,lambda_p,lambda_f,u_f,f0,f1,f2,f3,f4,d)
  
 %% 参数
 price = 5;
@@ -18,7 +18,8 @@ delta = 10;             %  与计算收敛误差有关，精确度
 [s] = initial_state_platoon(K);
 
 %动作集
-action = [-1,0,10,20,30,40,1,2,3];    %--10代表分配给头车处理，【注意】能采取该动作的前提是s{row,2}(1) = s1=0，否则，属于不合法状态
+action = [-1,0,10,20,30,40,1,2,3];    
+%--10代表分配给头车处理，【注意】能采取该动作的前提是s{row,2}(1) = s1=0，否则，属于不合法状态
 % 动作设置不同的数字只是为了区分不同的动作而已，相当于给不同的标记
 %-1为任务离开， 0为拒接处理任务
 
@@ -40,13 +41,14 @@ V = zeros(N,1);
 V_old = zeros(N,1);     %旧的价值函数
 sumpp = zeros(N,1);
 
+delay_all = zeros(N, length(action));
 
 %% 值迭代过程
 for iter_num = 1 : iter_max
     for i =1: N  % N表示状态总数   k=4时总共2096个
         %sprintf('********************** i 为 %d *****************************', i)
         Vss = [-1000;-1000;-1000;-1000;-1000;-1000;-1000;-1000;-1000];     %存储10个动作下的值，用于比较选出最大值函数的a
-        for x = 1 : length(action);      %遍历所有动作  总共9个
+        for x = 1 : length(action)     %遍历所有动作  总共9个
             a = action(x);    % a是目前采取的动作（-1,0,10,20,30,40,1,2,3）
             %输出当前动作a
             %sprintf('a为 %d',a)
@@ -87,10 +89,12 @@ for iter_num = 1 : iter_max
             end
                               
             T_vehicular = satu_delay_fog(s(i,:),a);  % 车载雾的接入时间 ms  传给车载雾的传输时间
+%             assert(T_vehicular >= 0)
            
             
             T_platoon = satu_delay_platoon(M);  % 【车队】的接入时间（只M有关）  ms  为车队内传输的时间（Tp）
-          
+%             assert(T_platoon >= 0)
+
             % 状态转移：根据当前状态s_current和当前动作a求出下一状态、转移概率和事件总速率
             % s_next0中，【s_next0{i，6}】存放未归一化的转移概率
             [s_next0,pp,sigma] = trans_state_platoon_s(K,M,s(i,:),a,lambda_f,u_f,lambda_p,f0,f1,f2,f3,f4,d);
@@ -126,47 +130,56 @@ for iter_num = 1 : iter_max
                     %sprintf('执行a 为10时的计算**************************************************************************')
                     T_save = (El-T_platoon - (d/f1)*1000 ); %% 这里单位都是:毫秒（ms）
                     %sprintf('T_platoon + (d/f1)*1000为 %d',T_platoon + (d/f1)*1000)
-                    %T_platoon + (d/f1)*1000
+%                     delay_all(i, x) = T_platoon + (d/f1)*1000;
+                    delay_all(i, x) = T_save;
                     
                     k(i) = price*T_save; %     
                 elseif a == 20
                     T_save = (El-T_platoon - (d/f2)*1000 );
                     %sprintf('T_platoon + (d/f2)*1000为 %d',T_platoon + (d/f2)*1000)
-                    %T_platoon + (d/f2)*1000
-                    
+%                     delay_all(i, x) = T_platoon + (d/f2)*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;
                 elseif a == 30
                     T_save = (El-T_platoon-(d/f3)*1000 );
                     %sprintf('T_platoon + (d/f3)*1000为 %d',T_platoon + (d/f3)*1000)
-                    %T_platoon+(d/f3)*1000
+%                     delay_all(i, x) = T_platoon+(d/f3)*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;         
                elseif a == 40
                     T_save = (El-T_platoon-(d/f4)*1000 );
                     %sprintf('T_platoon + (d/f4)*1000为 %d',T_platoon + (d/f4)*1000)
-                    %T_platoon+(d/f4)*1000
+%                     delay_all(i, x) = T_platoon+(d/f4)*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;                                       
                 elseif a == 1
                     T_save = (El- T_platoon-T_vehicular - (d/f0)*1000 );
-                    sprintf('T_platoon + T_vehicular + (d/f0)*1000 为 %d',T_platoon + T_vehicular + (d/f0)*1000)
-                    
-               
-                    T_platoon + T_vehicular + (d/f0)*1000
+%                     sprintf('T_platoon + T_vehicular + (d/f0)*1000 为 %d',T_platoon + T_vehicular + (d/f0)*1000)
+%                     delay_all(i, x) = T_platoon + T_vehicular + (d/f0)*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;
                 elseif a == 2
                     T_save = (El- T_platoon-T_vehicular - (d/(2*f0))*1000 );
-                    sprintf('T_platoon+T_vehicular + (d/(2*f0))*1000 为 %d',T_platoon+T_vehicular + (d/(2*f0))*1000)
-                    T_platoon+T_vehicular + (d/(2*f0))*1000
+%                     sprintf('T_platoon+T_vehicular + (d/(2*f0))*1000 为 %d',T_platoon+T_vehicular + (d/(2*f0))*1000)
+%                     delay_all(i, x) = T_platoon+T_vehicular + (d/(2*f0))*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;
                 elseif a == 3
                     T_save = (El- T_platoon-T_vehicular - (d/(3*f0))*1000 );
-                    sprintf('T_platoon + T_vehicular + (d/(3*f0))*1000 为 %d', T_platoon + T_vehicular + (d/(3*f0))*1000)
-                    T_platoon + T_vehicular + (d/(3*f0))*1000
+%                     sprintf('T_platoon + T_vehicular + (d/(3*f0))*1000 为 %d', T_platoon + T_vehicular + (d/(3*f0))*1000)
+%                     delay_all(i, x) = T_platoon + T_vehicular + (d/(3*f0))*1000;
+                    delay_all(i, x) = T_save;
                     k(i) = price*T_save;
                     % 丢弃包
                 elseif a == 0
                     k(i) = -punish;   
                 end
             end
+
+            %%%%%%%%%%%%%delay
+%             delay_all(i, x) = T_platoon + T_vehicular + (d/(3*f0))*1000;
+
+            %%%%%%%%%%%%%%%%%%
             
             if a == -1&&(strcmp(s{i,4}, 'D1')||strcmp(s{i,4}, 'D2')||strcmp(s{i,4}, 'D3')||strcmp(s{i,4}, 'D4')||strcmp(s{i,4}, 'L1')||strcmp(s{i,4}, 'L2')||strcmp(s{i,4}, 'L3')||strcmp(s{i,4}, 'F+1')) %请求离开+车到达
                 k(i) = 0;
